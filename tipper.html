@@ -1,0 +1,50 @@
+<html>
+<body>
+
+<input id="name" name="textinput" type="text" value="" placeholder="Name" required="">
+<textarea id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
+<button onclick="submit()" title="Donate!">Donate!</button>
+<p id="result">Result</p>
+<div id="qr_address" class="qr_address"></div>
+
+
+<script src="qrcode.js"></script>
+
+<script>
+  function ascii_to_hexa(str)
+    {
+  	var arr1 = [];
+  	for (var n = 0, l = str.length; n < l; n ++)
+       {
+  		var hex = Number(str.charCodeAt(n)).toString(16);
+  		arr1.push(hex);
+  	 }
+  	return arr1.join('');
+  }
+  function submit() {
+    name = document.getElementById("name").value;
+    message = document.getElementById("message").value;
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + "Watt3r", false );// window.location.pathname.replace("/", ""), false );
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send( null );
+    resp = JSON.parse(xmlHttp.responseText);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://api.twitchturtle.com/tipper", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        extra: ascii_to_hexa('{"name":"' + name + '","message":"' + message + '"}')
+    }));
+    xhr.onload = function() {
+          document.getElementById("result").innerHTML = "Send your TRTL to " + resp.address + " and add the payment Id " + JSON.parse(this.responseText).paymentID;
+          var typeNumber = 0;
+          var errorCorrectionLevel = 'L';
+          var qr = qrcode(typeNumber, errorCorrectionLevel);
+          qr.addData(resp.address);
+          qr.make();
+          document.getElementById('qr_address').innerHTML = qr.createImgTag();
+    }
+  }
+</script>
+</body>
