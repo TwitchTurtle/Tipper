@@ -25,7 +25,7 @@
     name = document.getElementById("name").value;
     message = document.getElementById("message").value;
     xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + "Watt3r", false );// window.location.pathname.replace("/", ""), false );
+    xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + window.location.pathname.replace("/", ""), false );
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.send( null );
     resp = JSON.parse(xmlHttp.responseText);
