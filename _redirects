@@ -1,3 +1,5 @@
 /    https://twitchturtle.com
 /*   /index.html   200
-*.trtl.tv trtl.tv/:splat 301!
+
+https://*.trtl.tv https://trtl.tv/:splat 301!
+http://user.twitchturtle.com/* http://trtl.tv/:splat 301!
