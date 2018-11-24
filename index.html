@@ -42,7 +42,7 @@
     xmlHttp.send( null );
     resp = JSON.parse(xmlHttp.responseText);
     
-    var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
+   
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://api.twitchturtle.com/tipper", true);
@@ -51,6 +51,7 @@
         extra: ascii_to_hexa('{"name":"' + name + '","message":"' + message + '"}')
     }));
     xhr.onload = function() {
+          var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
           document.getElementById("result").innerHTML = "Send your TRTL to " + intAddr;
           var typeNumber = 0;
           var errorCorrectionLevel = 'L';
