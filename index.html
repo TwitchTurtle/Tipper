@@ -9,8 +9,20 @@
 
 
 <script src="qrcode.js"></script>
+<script src="cryptonote.min.js"></script>
 
 <script>
+  function createIntegratedAddress(address, paymentid) {
+  var prefix = 3914525
+  try {
+    var addr = CryptoNote.decode_address(address, prefix)
+    if (!addr) return false
+    
+    return CryptoNote.encode_address(addr.publicViewKey, addr.publicSpendKey, prefix, paymentid)
+  } catch (e) {
+    return false
+  }
+}
   function ascii_to_hexa(str)
     {
   	var arr1 = [];
@@ -22,13 +34,15 @@
   	return arr1.join('');
   }
   function submit() {
-    name = document.getElementById("name").value;
-    message = document.getElementById("message").value;
+    var name = document.getElementById("name").value;
+    var message = document.getElementById("message").value;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + window.location.pathname.replace("/", ""), false );
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.send( null );
     resp = JSON.parse(xmlHttp.responseText);
+    
+    var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://api.twitchturtle.com/tipper", true);
@@ -37,11 +51,11 @@
         extra: ascii_to_hexa('{"name":"' + name + '","message":"' + message + '"}')
     }));
     xhr.onload = function() {
-          document.getElementById("result").innerHTML = "Send your TRTL to " + resp.address + " and add the payment Id " + JSON.parse(this.responseText).paymentID;
+          document.getElementById("result").innerHTML = "Send your TRTL to " + intAddr;
           var typeNumber = 0;
           var errorCorrectionLevel = 'L';
           var qr = qrcode(typeNumber, errorCorrectionLevel);
-          qr.addData(resp.address);
+          qr.addData(intAddr);
           qr.make();
           document.getElementById('qr_address').innerHTML = qr.createImgTag();
     }
