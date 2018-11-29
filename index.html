@@ -61,6 +61,7 @@ function submit() {
           qr.addData(intAddr);
           qr.make();
           document.getElementById('qr_address').innerHTML = qr.createImgTag();
+          swal("Send your TRTLs here!", intAddr + "<br><br>" + qr.createImgTag())
     }
 }
 window.onload = function(){ 
