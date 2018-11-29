@@ -1,12 +1,16 @@
 <html>
 <body>
-<img id="userLogo" style="height: 128px;display: block;margin: auto;" />
-<input id="name" name="textinput" type="text" value="" placeholder="Name" required="">
-<textarea id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
-<button onclick="submit()" title="Donate!">Donate!</button>
-<p id="result">Result</p>
-<div id="qr_address" class="qr_address"></div>
-
+<div style="width: 80%;text-align: center;margin: auto;display: block;">
+  <img id="userLogo" style="height: 128px;display: block;margin: auto;" />
+  <br><br>
+  <input id="name" name="textinput" type="text" value="" placeholder="Name" required="">
+  <br>
+  <textarea id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
+  <br>
+  <button onclick="submit()" title="Donate!">Donate!</button>
+  <p id="result">Result</p>
+  <div id="qr_address" class="qr_address"></div>
+</div>
 <script src="/qrcode.js"></script>
 <script src="/cryptonote.min.js"></script>
 
