@@ -1,6 +1,6 @@
 <html>
 <body>
-
+<img id="userLogo" style="height: 128px;" />
 <input id="name" name="textinput" type="text" value="" placeholder="Name" required="">
 <textarea id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
 <button onclick="submit()" title="Donate!">Donate!</button>
@@ -60,7 +60,15 @@ function submit() {
     }
 }
 window.onload = function(){ 
-    document.title = window.location.pathname.replace(/\//ig, "") + "'s TwitchTurtle donation page."
+    var username .= window.location.pathname.replace(/\//ig, "");
+    document.title = username + "'s TwitchTurtle donation page.";
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.twitch.tv/kraken/channels/" + username + "?client_id=rgkaxvgg18t24iqtys37zqa6s9r9sb", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = function() {
+          document.getElementById("userLogo").src = (JSON.parse(this.response).logo);
+    }
 }
 </script>
 </body>
