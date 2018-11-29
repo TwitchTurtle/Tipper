@@ -60,7 +60,7 @@ function submit() {
     }
 }
 window.onload = function(){ 
-    var username .= window.location.pathname.replace(/\//ig, "");
+    var username = window.location.pathname.replace(/\//ig, "");
     document.title = username + "'s TwitchTurtle donation page.";
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.twitch.tv/kraken/channels/" + username + "?client_id=rgkaxvgg18t24iqtys37zqa6s9r9sb", true);
