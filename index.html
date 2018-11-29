@@ -59,6 +59,8 @@ function submit() {
           document.getElementById('qr_address').innerHTML = qr.createImgTag();
     }
 }
-
+window.onload = function(){ 
+    document.title = window.location.pathname.replace(/\//ig, "") + "'s TwitchTurtle donation page."
+}
 </script>
 </body>
