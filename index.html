@@ -3,14 +3,14 @@
 <div id="userImg" style="width: 100%;height: 200px;margin-right: auto;">
 	<a id="userLink" style="color: #fff;position: absolute;top: 150px;right: 30px;">twitch.tv/blah</a>
 </div>
-<div style="width: 80%;text-align: center;margin: auto;display: block;margin-top: 3%;">
+<div class="container" style="text-align: center;margin: auto;display: block;margin-top: 3%;box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);border-radius: 2px;background-color: #fff;padding: 20px;">
   <img id="userLogo" style="height: 128px;display: block;margin: auto;" />
   <br>
   <h2 id="userName"></h2>
   <br>
   <input class="form" id="name" name="textinput" type="text" value="" placeholder="Name" required="">
   <br>
-  <textarea class="form" id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
+  <textarea class="form" id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;font-size: 11px;" placeholder="Your Message"></textarea>
   <br>
   <button class="button" onclick="submit()" title="Donate!">Donate!</button>
   <p id="result"></p>
@@ -148,6 +148,13 @@ window.onload = function(){
     outline: 1px dotted #959595;
     outline-offset: -4px;
   }
+}
+.container {
+	max-width: 85%;
+}
+@media screen and (max-width: 761px)
+.container {
+    max-width: 100%;
 }
 
 </style>
