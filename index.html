@@ -11,7 +11,7 @@
   <br>
   <textarea class="form" id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 36px;width: 51%;font-size: 11px;" placeholder="Your Message"></textarea>
   <br>
-  <button onclick="submit()" title="Donate!">Donate!</button>
+  <button class="button" onclick="submit()" title="Donate!">Donate!</button>
   <p id="result"></p>
   <div id="qr_address" class="qr_address"></div>
 </div>
@@ -100,7 +100,8 @@ window.onload = function(){
   display: flex;
   overflow: hidden;
 
-  margin: 10px;
+  margin: auto;
+  margin-top: 0.75%;
   padding: 12px 12px;
 
   cursor: pointer;
@@ -112,7 +113,8 @@ window.onload = function(){
   text-transform: none;
   text-transform: capitalize;
 
-  color: #fff;
+  background: #3dd28d;
+  color: #FFF;
   border: 0 none;
   border-radius: 4px;
 
