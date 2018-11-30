@@ -1,6 +1,9 @@
 <html>
 <body style="background-color: #f5f5f5;">
-<div id="userImg" style="width: 100%;height: 200px;margin-right: auto;background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url(https://static-cdn.jtvnw.net/jtv_user_pictures/df57f76ae9527319-profile_banner-480.png) center center / cover no-repeat;" https:="" static-cdn.jtvnw.net="" jtv_user_pictures=""></div>
+<div id="userImg" style="width: 100%;height: 200px;margin-right: auto;background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url(https://static-cdn.jtvnw.net/jtv_user_pictures/df57f76ae9527319-profile_banner-480.png) center center / cover no-repeat;" https:="" static-cdn.jtvnw.net="" jtv_user_pictures="">
+	<a id="userName" style="color: #fff;position: absolute;top: 150px;left: 30px;">Name</a>
+	<a id="userLink" style="color: #fff;position: absolute;top: 150px;right: 30px;">twitch.tv/blah</a>
+</div>
 <div style="width: 80%;text-align: center;margin: auto;display: block;">
   <img id="userLogo" style="height: 128px;display: block;margin: auto;" />
   <br><br>
@@ -73,8 +76,12 @@ window.onload = function(){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
     xhr.onload = function() {
-      document.getElementById("userLogo").src = (JSON.parse(this.response).logo);
-		  document.getElementById("userImg").style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url('" + (JSON.parse(this.response).profile_banner) + "')";
+	var res = JSON.parse(this.response);
+      	document.getElementById("userLogo").src = (res.logo);
+	document.getElementById("userImg").style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url('" + (res.profile_banner) + "')";
+	document.getElementById("userName").innerHTML = username
+	document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
+	document.getElementById("userLink").href = "https://twitch.tv/" + username;
     }
 }
 </script>
