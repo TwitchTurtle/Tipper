@@ -89,21 +89,21 @@ function submit() {
       extra: ascii_to_hexa('{"name":"' + name + '","message":"' + message + '"}')
     }));
     xhr.onload = function() {
-          var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
-					swal({
+ 	var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
+	swal({
             confirmButtonColor: '#4caf50',
             allowOutsideClick: false,
             html: '<div id="qrcode"></div><div id="donationAddress"><h3>' + intAddr + '</h3></div>'
-          });
-					var qrcode = new QRCode(document.getElementById("qrcode"),{
-							text: intAddr,
-							width: 400,
-							height: 400,
-							colorDark: "#000000",
-							colorLight: "#ffffff",
-							correctLevel: QRCode.CorrectLevel.H,
-							logo: 'assets/img/logo.png',
-					});
+        });
+	var qrcode = new QRCode(document.getElementById("qrcode"),{
+		text: intAddr,
+		width: 400,
+		height: 400,
+		colorDark: "#000000",
+		colorLight: "#ffffff",
+		correctLevel: QRCode.CorrectLevel.H,
+		logo: 'assets/img/logo.png',
+	});
     }
 }
 window.onload = function(){
