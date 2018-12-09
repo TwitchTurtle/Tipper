@@ -109,6 +109,9 @@ function submit() {
 window.onload = function(){
     var username = window.location.pathname.replace(/\//ig, "");
     document.title = username + "'s TwitchTurtle donation page.";
+    document.getElementById("userName").innerHTML = username + "'s donation page."
+    document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
+    document.getElementById("userLink").href = "https://twitch.tv/" + username;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.twitch.tv/kraken/channels/" + username + "?client_id=rgkaxvgg18t24iqtys37zqa6s9r9sb", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -117,9 +120,6 @@ window.onload = function(){
 	var res = JSON.parse(this.response);
       	document.getElementById("userLogo").src = (res.logo);
 	document.getElementById("userImg").style.background = "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url('" + (res.profile_banner) + "') center center / cover no-repeat";
-	document.getElementById("userName").innerHTML = username + "'s donation page."
-	document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
-	document.getElementById("userLink").href = "https://twitch.tv/" + username;
     }
 }
 </script>
