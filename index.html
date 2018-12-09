@@ -4,7 +4,7 @@
 </head>
 <body style="background-color: #f5f5f5;font-family: Roboto,sans-serif;margin: 0px">
 <div id="userImg" style="width: 100%;height: 200px;margin-right: auto;">
-	<a id="userLink" style="color: #fff;position: absolute;top: 150px;right: 30px;">twitch.tv/blah</a>
+	<a id="userLink" style="color: #fff;position: absolute;top: 150px;right: 30px;">twitch.tv/TwitchTurtleOfficial</a>
 </div>
 <div class="container">
   <img id="userLogo" style="height: 128px;display: block;margin: auto;border-radius: 5%;" />
@@ -106,7 +106,7 @@ function submit() {
 	});
     }
 }
-document.onload = function(){
+window.onload = function(){
     var username = window.location.pathname.replace(/\//ig, "");
     document.title = username + "'s TwitchTurtle donation page.";
     document.getElementById("userName").innerHTML = username + "'s donation page."
