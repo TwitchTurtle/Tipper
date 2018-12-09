@@ -107,7 +107,7 @@ function submit() {
     }
 }
 window.onload = function(){
-    var username = window.location.pathname.replace(/\//ig, "");
+    var username = window.location.pathname.replace(/\//ig, "").replace(/%20/gm, " ");
     document.title = username + "'s TwitchTurtle donation page.";
     document.getElementById("userName").innerHTML = username + "'s donation page."
     document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
