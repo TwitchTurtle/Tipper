@@ -62,7 +62,11 @@ function createIntegratedAddress(address, paymentid) {
     return false
   }
 }
-
+	
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+	
 function ascii_to_hexa(str) {
   	var arr1 = [];
   	for (var n = 0, l = str.length; n < l; n ++)
@@ -102,7 +106,7 @@ function submit() {
     }
 }
 window.onload = function(){
-    var username = window.location.pathname.replace(/\//ig, "").replace(/%20/gm, " ");
+    var username = capitalizeFirstLetter(window.location.pathname.replace(/\//ig, "").replace(/%20/gm, " "));
     document.title = username + "'s TwitchTurtle donation page.";
     document.getElementById("userName").innerHTML = username + "'s donation page."
     document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
