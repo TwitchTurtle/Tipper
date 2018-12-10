@@ -113,8 +113,8 @@ window.onload = function(){
     xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + username, false );
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.send( null );
-    resp.onreadystatechange = () => {
-        if (xmlHttp.status === 404) {
+    xmlHttp.onreadystatechange = () => {
+        if (xmlHttp.status === 400) {
             swal({
                 confirmButtonColor: '#4caf50',
                 allowOutsideClick: false,
