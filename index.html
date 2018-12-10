@@ -11,7 +11,7 @@
   <br>
   <h2 id="userName" style="font-family: 'Open Sans Condensed', sans-serif;font-weight: 900;font-size: 2em;"></h2>
   <br>
-  <input class="form" id="name" name="textinput" type="text" value="" placeholder="Name" required="">
+  <input class="form" id="name" name="textinput" type="text" value="" placeholder="Name">
   <br>
   <textarea class="form" id="message" style="overflow: hidden;margin-top: 5.5px;margin-bottom: 0px;height: 5em;font-size: 1.15em;" placeholder="Your Message"></textarea>
   <br>
@@ -76,11 +76,6 @@ function ascii_to_hexa(str) {
 function submit() {
     var name = document.getElementById("name").value;
     var message = document.getElementById("message").value;
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + window.location.pathname.replace(/\//ig, ""), false );
-    xmlHttp.setRequestHeader('Content-Type', 'application/json');
-    xmlHttp.send( null );
-    resp = JSON.parse(xmlHttp.responseText);
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "https://api.twitchturtle.com/tipper", true);
@@ -89,7 +84,7 @@ function submit() {
       extra: ascii_to_hexa('{"name":"' + name + '","message":"' + message + '"}')
     }));
     xhr.onload = function() {
- 	var intAddr = createIntegratedAddress(resp.address, JSON.parse(this.responseText).paymentID);
+ 	var intAddr = createIntegratedAddress(address, JSON.parse(this.responseText).paymentID);
 	swal({
             confirmButtonColor: '#4caf50',
             allowOutsideClick: false,
@@ -112,6 +107,23 @@ window.onload = function(){
     document.getElementById("userName").innerHTML = username + "'s donation page."
     document.getElementById("userLink").innerHTML = "https://twitch.tv/" + username;
     document.getElementById("userLink").href = "https://twitch.tv/" + username;
+
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + username, false );
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send( null );
+    resp.onreadystatechange = () => {
+        if (xmlHttp.status === 404) {
+            swal({
+                confirmButtonColor: '#4caf50',
+                allowOutsideClick: false,
+                html: '<h1>Error: Streamer Not Found</h1><div id="error"><h3>The streamer link you clicked on is not valid.</h3></div>'
+            });
+        }
+    };
+    address = JSON.parse(xmlHttp.responseText).address;
+
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.twitch.tv/kraken/channels/" + username + "?client_id=rgkaxvgg18t24iqtys37zqa6s9r9sb", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
