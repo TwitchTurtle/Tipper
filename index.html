@@ -92,7 +92,7 @@ function submit() {
 	swal({
             confirmButtonColor: '#4caf50',
             allowOutsideClick: false,
-            html: '<div id="qrcode"></div><div id="donationAddress"><h3>' + intAddr + '</h3></div>'
+            html: '<div id="qrcode"></div><div id="donationAddress"><h3>' + intAddr + '</h3></div><p>Make sure to send at least ' + minAlert + ' USD to make your donation show up on stream</p>'
         });
 	var qrcode = new QRCode(document.getElementById("qrcode"),{
 		text: intAddr,
@@ -113,7 +113,7 @@ window.onload = function(){
     document.getElementById("userLink").href = "https://twitch.tv/" + username;
 
 
-    xmlHttp = new XMLHttpRequest();
+    var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", "https://api.twitchturtle.com/address/" + username, false );
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
     xmlHttp.onreadystatechange = () => {
@@ -126,7 +126,9 @@ window.onload = function(){
         }
     };
     xmlHttp.send( null );
-    address = JSON.parse(xmlHttp.responseText).address;
+    var resp = JSON.parse(xmlHttp.responseText);
+    address = resp.address;
+    minAlert = resp.minDonation;
 
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://api.twitch.tv/kraken/channels/" + username + "?client_id=rgkaxvgg18t24iqtys37zqa6s9r9sb", true);
